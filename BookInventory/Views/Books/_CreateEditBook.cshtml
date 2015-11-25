@@ -1,0 +1,92 @@
+﻿
+@model  BookInventory.Models.ViewModels.BookDataViewModel
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<form>
+    <div class="spaced">
+        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3 horizontal-align">
+            <label>ISBN 10</label>
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-6 horizontal-align">
+            @Html.TextBoxFor(s => s.Book.Isbn10, new { @class = "form-control" })
+        </div>        
+        <div class="btn btn-default col-lg-2 col-md-2 col-sm-2 col-xs-3 horizontal-align" id="isbnLookup1">Isbn lookup</div>
+        @Html.ValidationMessageFor(model => model.Book.Isbn10, "", new { @class = "text-danger" })
+    </div>
+    <div class="spaced">
+        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-3 horizontal-align">
+            <label>ISBN 13</label>  
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-6 horizontal-align">
+            @Html.TextBoxFor(s => s.Book.Isbn13, new { @class = "form-control" })
+        </div>   
+        <div class="btn btn-default col-lg-2 col-md-2 col-sm-2 col-xs-3" id="isbnLookup2">Isbn lookup</div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label>Title</label>
+        </div>
+        <div>
+            @Html.TextBoxFor(s => s.Book.Title, new { @class = "form-control" })
+        </div>        
+        @Html.ValidationMessageFor(model => model.Book.Title, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label>Subtitle</label>
+        @Html.TextBoxFor(s => s.Book.Subtitle, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Publisher</label>
+        @Html.TextBoxFor(s => s.Book.Publisher, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Published Date</label>
+        @Html.TextBoxFor(s => s.Book.PublishedDate, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        @Html.TextAreaFor(s => s.Book.Description, new { @class = "form-control", @rows = "4" })
+    </div>
+    <div class="form-group">
+        <div>
+            <label>Authors</label>
+            @Html.TextBoxFor(s => s.AuthorsText, new { @class = "form-control", @placeholder = "test" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label>Categories</label>
+            @Html.TextBoxFor(s => s.CategoriesText, new { @class = "form-control", @placeholder = "test2" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Location Codes</label>
+        <div>
+            @foreach (var item in Model.LocationCodes)
+            {
+                <div class="checkbox-inline">
+                    <input type="checkbox" name="itemCode" value="@item.Id" /><strong>@item.Code</strong>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Cost Price</label>
+        @Html.TextBoxFor(s => s.Book.CostPrice, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Sales price</label>
+        @Html.TextBoxFor(s => s.Book.SalesPrice, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Quantity</label>
+        @Html.TextBoxFor(s => s.Book.Quantity, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script src="~/Scripts/ApplicationScript/bookService.js"></script>
