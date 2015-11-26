@@ -59,6 +59,7 @@ namespace BookInventory.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 uow.BookRepository.Insert(bdModel.Book);
                 uow.BookRepository.SaveChanges();
                 return RedirectToAction("Index");
