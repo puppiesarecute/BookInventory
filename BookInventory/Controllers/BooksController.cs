@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using BookInventory.Models;
 using BookInventory.DAL;
 using BookInventory.Models.ViewModels;
+using BookInventory.Helpers;
 
 namespace BookInventory.Controllers
 {
@@ -59,10 +60,52 @@ namespace BookInventory.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                uow.BookRepository.Insert(bdModel.Book);
-                uow.BookRepository.SaveChanges();
-                return RedirectToAction("Index");
+                // check if this ISbn no has been added, if yes do an update instead of insert
+                var existingIsbn = uow.BookRepository.FirstOrDefault(x => x.Isbn10 == bdModel.Book.Isbn10);
+                if (existingIsbn == null) //no existing Isbn, do insert
+                {
+                    bdModel.Book.Authors = new List<Author>();
+                    if (bdModel.AuthorsText != null)
+                    {
+                        var authors = HelperClass.converStringToListAuthors(bdModel.AuthorsText);
+                        foreach (var item in authors)
+                        {
+                            var existingAuthor = uow.AuthorRepository.FirstOrDefault(x => x.AuthorName == item.AuthorName);
+                            if (existingAuthor != null)
+                            {
+                                bdModel.Book.Authors.Add(existingAuthor);
+                            }
+                            else
+                            {
+                                bdModel.Book.Authors.Add(item);
+                            }
+                        }
+                    }
+
+                    bdModel.Book.Categories = new List<Category>();
+                    if (bdModel.CategoriesText != null)
+                    {
+                        var categories = HelperClass.converStringToListCategories(bdModel.CategoriesText);
+                        foreach (var item in categories)
+                        {
+                            var existingCategory = uow.CategoryRepository.FirstOrDefault(x => x.CategoryName == item.CategoryName);
+                            if (existingCategory != null)
+                            {
+                                bdModel.Book.Categories.Add(existingCategory);
+                            }
+                            else
+                            {
+                                bdModel.Book.Categories.Add(item);
+                            }
+                        }
+                    }
+
+                    uow.BookRepository.Insert(bdModel.Book);
+                    uow.BookRepository.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+
             }
 
             BookDataViewModel test = new BookDataViewModel

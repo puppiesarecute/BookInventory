@@ -12,6 +12,7 @@ namespace BookInventory.DAL
         private GenericRepository<Book> bookRepository;
         private GenericRepository<Author> authorRepository;
         private GenericRepository<LocationCode> locationCodeRepository;
+        private GenericRepository<Category> categoryRepository;
         // Add more repos
 
         public GenericRepository<Book> BookRepository
@@ -37,6 +38,19 @@ namespace BookInventory.DAL
                     this.authorRepository = new GenericRepository<Author>(context);
                 }
                 return authorRepository;
+            }
+        }
+
+        public GenericRepository<Category> CategoryRepository
+        {
+            get
+            {
+
+                if (this.categoryRepository == null)
+                {
+                    this.categoryRepository = new GenericRepository<Category>(context);
+                }
+                return categoryRepository;
             }
         }
 

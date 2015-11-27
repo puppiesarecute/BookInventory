@@ -43,6 +43,12 @@ namespace BookInventory.DAL
                 return query.ToList();
             }
         }
+
+        public virtual TEntity FirstOrDefault(Expression<Func<TEntity, bool>> filter)
+        {
+            return dbSet.FirstOrDefault(filter);
+        }
+
         public virtual TEntity GetByID(object id)
         {
             return dbSet.Find(id);
