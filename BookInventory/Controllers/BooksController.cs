@@ -54,8 +54,6 @@ namespace BookInventory.Controllers
 
         //// POST: Books/Create
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Isbn10,Isbn13,Title,Subtitle,Publisher,PublishedDate,Description,CostPrice,SalesPrice,Quantity")] BookDataViewModel bdModel)
         public ActionResult Create(BookDataViewModel bdModel, IEnumerable<int> itemCode)
         {
             if (ModelState.IsValid)
@@ -64,6 +62,7 @@ namespace BookInventory.Controllers
                 var existingIsbn = uow.BookRepository.FirstOrDefault(x => x.Isbn10 == bdModel.Book.Isbn10);
                 if (existingIsbn == null) //no existing Isbn, do insert
                 {
+                    // handle book's authors
                     bdModel.Book.Authors = new List<Author>();
                     if (bdModel.AuthorsText != null)
                     {
@@ -82,6 +81,7 @@ namespace BookInventory.Controllers
                         }
                     }
 
+                    // handle book's categories
                     bdModel.Book.Categories = new List<Category>();
                     if (bdModel.CategoriesText != null)
                     {
@@ -100,22 +100,27 @@ namespace BookInventory.Controllers
                         }
                     }
 
-                    uow.BookRepository.Insert(bdModel.Book);
-                    uow.BookRepository.SaveChanges();
-                    return RedirectToAction("Index");
+                    // handle Location Codes
+                    bdModel.Book.LocationCodes = uow.LocationCodeRepository.Get(x => itemCode.Contains(x.Id)).ToList();
+
+                    // save to db
+                    uow.BookRepository.Insert(bdModel.Book);                    
+                }
+                else //this Isbn already exist in db
+                {
+                    uow.BookRepository.Update(bdModel.Book);
                 }
 
-
+                uow.BookRepository.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            BookDataViewModel test = new BookDataViewModel
+            BookDataViewModel initial = new BookDataViewModel
             {
                 Book = new Book(),
-                AuthorsText = String.Empty,
-                CategoriesText = String.Empty,
                 LocationCodes = uow.LocationCodeRepository.Get()
             };
-            return View(test);
+            return View(initial);
         }
 
         //// GET: Books/Edit/5

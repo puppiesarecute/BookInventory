@@ -49,6 +49,14 @@
                         $('#Book_Isbn10').val(Isbn10);
                         $('#Book_Isbn13').val(Isbn13);
                     }
+                    var imageLinks = volumeInfo.imageLinks;
+                    var thumbnail = imageLinks.thumbnail;
+                    if (thumbnail !== undefined)
+                    {
+                        $('#bookThumbnail').attr('src', thumbnail
+                            );
+                    }
+                    debugger
                     var title = volumeInfo.title;
                     $('#Book_Title').val(title);
                     var subtitle = volumeInfo.subtitle;
@@ -59,7 +67,6 @@
                     $('#Book_PublishedDate').val(publishedDate);
                     var desc = volumeInfo.description;
                     $('#Book_Description').val(desc);
-
                     var authors = volumeInfo.authors;
                     $('#AuthorsText').val(authors);
                     var categories = volumeInfo.categories;
