@@ -49,14 +49,19 @@
                         $('#Book_Isbn10').val(Isbn10);
                         $('#Book_Isbn13').val(Isbn13);
                     }
-                    var imageLinks = volumeInfo.imageLinks;
-                    var thumbnail = imageLinks.thumbnail;
-                    if (thumbnail !== undefined)
-                    {
-                        $('#bookThumbnail').attr('src', thumbnail
-                            );
+
+                    if (volumeInfo.imageLinks !== undefined) {
+                        var imageLinks = volumeInfo.imageLinks;
+                        var thumbnail = imageLinks.thumbnail;
+                        if (thumbnail !== undefined) {
+                            $('#bookThumbnail').attr('src', thumbnail);
+                            $('#Book_CoverThumbnailPath').val(thumbnail);
+                        }
                     }
-                    debugger
+                    else {
+                        $('#Book_CoverThumbnailPath').val($('#bookThumbnail').attr('src'));
+                    }
+
                     var title = volumeInfo.title;
                     $('#Book_Title').val(title);
                     var subtitle = volumeInfo.subtitle;

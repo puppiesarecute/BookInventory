@@ -6,6 +6,7 @@
     <div class="form-group" style="height:200px">
         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
             <img src="~/Resources/Untitled.png" alt="book" class="img-thumbnail" id="bookThumbnail"/>
+            @Html.HiddenFor(s => s.Book.CoverThumbnailPath)
         </div>
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-8">
             <div class="spaced">

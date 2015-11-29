@@ -41,3 +41,9 @@ textarea {
 legend {
     font-size: 40px;
 }
+
+.img-thumbnail {
+    width: 128px;
+    height: 191px;
+    margin: 15px;
+}

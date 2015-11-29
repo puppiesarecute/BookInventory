@@ -20,9 +20,8 @@ namespace BookInventory.Controllers
         // GET: Books
         public ActionResult Index()
         {
-            //var books = unitOfWork.BookRepository.Get
-            //return View(db.Books.ToList());
-            return View();
+            var books = uow.BookRepository.Get();
+            return View(books);
         }
 
         //// GET: Books/Details/5
@@ -101,6 +100,7 @@ namespace BookInventory.Controllers
                     }
 
                     // handle Location Codes
+                    // TODO: handle when none checkbox is checked
                     bdModel.Book.LocationCodes = uow.LocationCodeRepository.Get(x => itemCode.Contains(x.Id)).ToList();
 
                     // save to db

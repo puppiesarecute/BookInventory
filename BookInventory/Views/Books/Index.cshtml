@@ -1,8 +1,15 @@
-﻿@model BookInventory.Models.Book
+﻿@model IEnumerable<BookInventory.Models.Book>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<legend>Library</legend>
+<div class="container-fluid row">
+    @foreach (var item in Model)
+    {
+        <a href=""><img src="@item.CoverThumbnailPath" alt="Book" class="img-thumbnail"/></a>
+    }
+
+</div>
 
