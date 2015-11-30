@@ -57,6 +57,7 @@ namespace BookInventory.DAL
         public virtual void Insert(TEntity entity)
         {
             dbSet.Add(entity);
+            SaveChanges();
         }
 
         public virtual void Delete(object id)
@@ -76,11 +77,12 @@ namespace BookInventory.DAL
 
         public virtual void Update(TEntity entityToUpdate)
         {
-            if (context.Entry(entityToUpdate).State == EntityState.Detached)
-            {
-                dbSet.Attach(entityToUpdate);
-            }            
+            //if (context.Entry(entityToUpdate).State == EntityState.Detached)
+            //{
+            //    dbSet.Attach(entityToUpdate);
+            //}            
             context.Entry(entityToUpdate).State = EntityState.Modified;
+            SaveChanges();
         }
 
         public virtual void SaveChanges()
