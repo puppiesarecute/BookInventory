@@ -108,6 +108,7 @@ namespace BookInventory.Controllers
                 }
                 else //this Isbn already exist in db
                 {
+                    bdModel.Book.BookId = existingIsbn.BookId;
                     uow.BookRepository.Update(bdModel.Book);
                 }
 
