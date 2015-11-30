@@ -76,7 +76,10 @@ namespace BookInventory.DAL
 
         public virtual void Update(TEntity entityToUpdate)
         {
-            dbSet.Attach(entityToUpdate);
+            if (context.Entry(entityToUpdate).State == EntityState.Detached)
+            {
+                dbSet.Attach(entityToUpdate);
+            }            
             context.Entry(entityToUpdate).State = EntityState.Modified;
         }
 
