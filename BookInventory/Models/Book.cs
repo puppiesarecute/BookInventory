@@ -20,8 +20,11 @@ namespace BookInventory.Models
         public string Publisher { get; set; }
         public string PublishedDate { get; set; }
         public string Description { get; set; }
+        [Required(ErrorMessage = "Wrong number format")]
         public double CostPrice { get; set; }
+        [Required(ErrorMessage = "Wrong number format")]
         public double SalesPrice { get; set; }
+        [Required(ErrorMessage = "Wrong number format")]
         public int Quantity { get; set; }
         public string CoverThumbnailPath { get; set; }
 

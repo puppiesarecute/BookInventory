@@ -8,5 +8,10 @@ namespace BookInventory.Models
         public string AuthorName { get; set; }
 
         public virtual ICollection<Book> Books { get; set; }
+
+        public override string ToString()
+        {
+            return this.AuthorName;
+        }
     }
 }

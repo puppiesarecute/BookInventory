@@ -3,8 +3,8 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <h1>BookStore Management System</h1>
+    <p class="lead">A light-weight inventory and sales management system for book stores built in ASP.NET Framework.</p>
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
 
@@ -12,20 +12,20 @@
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            To use the system, please login or register an account. <br />Or you can use our test account below:
+            <blockquote>
+                username : admin
+                <br />
+                password : VhV8a7UJ*
+            </blockquote>            
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Login", "Account")">Login &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div class="col-md-8">
+        <h2>It's all about books!</h2>
+        <p><blockquote>A book is a dream that you hold in your hand.</blockquote>
+            - Neil Gailman
+        </p>
+        <p><img class="img-thumbnail" src="https://booksandbeverages.files.wordpress.com/2013/10/book-inspiration-quote.jpg"/></p>
     </div>
 </div>

@@ -32,4 +32,19 @@ namespace BookInventory.Helpers
             return result;
         }
     }
+
+    static class ListExtension
+    {
+        public static string ConvertToString<T>(this IEnumerable<T> items)
+        {
+            string result = "";
+            for (int i = 0; i < items.Count() - 1; i++)
+            {
+                result += items.ElementAt(i).ToString() + ", ";
+            }
+
+            result += items.ElementAt(items.Count() - 1);
+            return result;
+        }
+    }
 }

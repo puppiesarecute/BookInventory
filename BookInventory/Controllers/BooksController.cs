@@ -10,6 +10,7 @@ using BookInventory.Models;
 using BookInventory.DAL;
 using BookInventory.Models.ViewModels;
 using BookInventory.Helpers;
+using AutoMapper;
 
 namespace BookInventory.Controllers
 {
@@ -101,14 +102,19 @@ namespace BookInventory.Controllers
 
                     // handle Location Codes
                     // TODO: handle when none checkbox is checked
-                    bdModel.Book.LocationCodes = uow.LocationCodeRepository.Get(x => itemCode.Contains(x.Id)).ToList();
+                    if (itemCode != null)
+                    {
+                        bdModel.Book.LocationCodes = uow.LocationCodeRepository.Get(x => itemCode.Contains(x.Id)).ToList();
+                    }                    
 
                     // save to db
                     uow.BookRepository.Insert(bdModel.Book);                    
                 }
                 else //this Isbn already exist in db
                 {
-                    existingIsbn.Quantity = bdModel.Book.Quantity;
+                    // TODO using automapper to map bdModel.Book to existingIsbn - HOW???
+                    //existingIsbn = Mapper.Map<Book>(bdModel.Book);
+                    
                     uow.BookRepository.Update(existingIsbn);
                 }
 
