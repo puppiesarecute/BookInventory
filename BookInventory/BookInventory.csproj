@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationCodesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
@@ -257,6 +258,12 @@
     <Content Include="Views\Books\Create.cshtml" />
     <Content Include="Views\Books\_CreateEditBook.cshtml" />
     <Content Include="Views\Books\Index.cshtml" />
+    <Content Include="Views\LocationCodes\Create.cshtml" />
+    <Content Include="Views\LocationCodes\Delete.cshtml" />
+    <Content Include="Views\LocationCodes\Details.cshtml" />
+    <Content Include="Views\LocationCodes\Edit.cshtml" />
+    <Content Include="Views\LocationCodes\Index.cshtml" />
+    <Content Include="Views\Books\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
