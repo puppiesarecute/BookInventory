@@ -1,0 +1,10 @@
+﻿@model BookInventory.Models.ViewModels.BookDataViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<legend>Edit Book</legend>
+@Html.HiddenFor(x => x.Book.BookId)
+@Html.Partial("_CreateEditBook")
+

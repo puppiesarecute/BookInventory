@@ -1,0 +1,15 @@
+﻿@model IEnumerable<BookInventory.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<legend>Library</legend>
+<div class="container-fluid row">
+    @foreach (var item in Model)
+    {
+        <a href="@Url.Action("Edit","Books", new { bookId = item.BookId})" title="@item.Title"><img src="@item.CoverThumbnailPath" alt="Book" class="img-thumbnail"/></a>
+    }
+
+</div>
+

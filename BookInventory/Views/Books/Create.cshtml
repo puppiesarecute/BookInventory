@@ -1,0 +1,16 @@
+﻿@model BookInventory.Models.ViewModels.BookDataViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<legend>Create</legend>
+
+<div class="grayboxx">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.Partial("_CreateEditBook")
+    }
+</div>
+
+
