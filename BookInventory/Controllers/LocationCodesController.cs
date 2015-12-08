@@ -7,17 +7,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BookInventory.Models;
+using BookInventory.DAL;
 
 namespace BookInventory.Controllers
 {
     public class LocationCodesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private UnitOfWork uow = new UnitOfWork();
 
         // GET: LocationCodes
         public ActionResult Index()
         {
-            return View(db.LocationCodes.ToList());
+            var list = uow.LocationCodeRepository.Get();
+            return View(list);
         }
 
         // GET: LocationCodes/Details/5
@@ -27,7 +29,7 @@ namespace BookInventory.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LocationCode locationCode = db.LocationCodes.Find(id);
+            LocationCode locationCode = uow.LocationCodeRepository.GetByID(id);
             if (locationCode == null)
             {
                 return HttpNotFound();
@@ -50,8 +52,8 @@ namespace BookInventory.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.LocationCodes.Add(locationCode);
-                db.SaveChanges();
+                uow.LocationCodeRepository.Insert(locationCode);
+                
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +67,8 @@ namespace BookInventory.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LocationCode locationCode = db.LocationCodes.Find(id);
+            LocationCode locationCode = uow.LocationCodeRepository.GetByID(id);
+
             if (locationCode == null)
             {
                 return HttpNotFound();
@@ -82,8 +85,8 @@ namespace BookInventory.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(locationCode).State = EntityState.Modified;
-                db.SaveChanges();
+                uow.LocationCodeRepository.Update(locationCode);
+                
                 return RedirectToAction("Index");
             }
             return View(locationCode);
@@ -96,7 +99,7 @@ namespace BookInventory.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LocationCode locationCode = db.LocationCodes.Find(id);
+            LocationCode locationCode = uow.LocationCodeRepository.GetByID(id);
             if (locationCode == null)
             {
                 return HttpNotFound();
@@ -109,9 +112,11 @@ namespace BookInventory.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            LocationCode locationCode = db.LocationCodes.Find(id);
-            db.LocationCodes.Remove(locationCode);
-            db.SaveChanges();
+            LocationCode locationCode = uow.LocationCodeRepository.GetByID(id);
+           
+            uow.LocationCodeRepository.Delete(locationCode);
+            uow.Save();
+
             return RedirectToAction("Index");
         }
 
@@ -119,7 +124,7 @@ namespace BookInventory.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                uow.Dispose();
             }
             base.Dispose(disposing);
         }
