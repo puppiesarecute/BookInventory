@@ -38,12 +38,15 @@ namespace BookInventory.Helpers
         public static string ConvertToString<T>(this IEnumerable<T> items)
         {
             string result = "";
-            for (int i = 0; i < items.Count() - 1; i++)
+            if (items.Count() > 0)
             {
-                result += items.ElementAt(i).ToString() + ", ";
-            }
+                for (int i = 0; i < items.Count() - 1; i++)
+                {
+                    result += items.ElementAt(i).ToString() + ", ";
+                }
 
-            result += items.ElementAt(items.Count() - 1);
+                result += items.ElementAt(items.Count() - 1);
+            }
             return result;
         }
     }

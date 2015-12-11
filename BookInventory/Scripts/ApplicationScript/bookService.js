@@ -8,25 +8,19 @@
             alert("Please enter an Isbn10 number");
         }
     })
-
-    $("#isbnLookup2").click(function () {
-        var isbn2 = $('#Book_Isbn13').text();
-        if (isbn2 !== "") {
-            ajaxCall(isbn2);
-        }
-        else {
-            alert("Please enter an Isbn13 number");
-        }
-    })
-
+    
     function ajaxCall(isbn) {
+        //clear all textbox before call
+        $("input[type=text]").val("");
+        $("textarea").val("");
+
+        // make the call
         $.ajax({
             type: "GET",
             url: "https://www.googleapis.com/books/v1/volumes",
             data: { q: 'isbn:' + isbn },
             success: function (response) {
                 //what to do after the call is success
-                //debugger
                 if (response.items === undefined) {
                     alert("Sorry, cannot find any book with this Isbn number");
                 }

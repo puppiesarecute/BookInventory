@@ -6,8 +6,8 @@
 
 <legend>Create</legend>
 
-<div class="grayboxx">
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+<div>
+    @using (Html.BeginForm(null, null, FormMethod.Post))
     {
         @Html.Partial("_CreateEditBook")
     }

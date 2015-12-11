@@ -19,7 +19,6 @@ namespace BookInventory.DAL
         {
             get
             {
-
                 if (this.bookRepository == null)
                 {
                     this.bookRepository = new GenericRepository<Book>(context);
@@ -32,7 +31,6 @@ namespace BookInventory.DAL
         {
             get
             {
-
                 if (this.authorRepository == null)
                 {
                     this.authorRepository = new GenericRepository<Author>(context);
@@ -45,7 +43,6 @@ namespace BookInventory.DAL
         {
             get
             {
-
                 if (this.categoryRepository == null)
                 {
                     this.categoryRepository = new GenericRepository<Category>(context);

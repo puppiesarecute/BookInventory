@@ -1,0 +1,47 @@
+﻿@model BookInventory.Models.ViewModels.BookDataViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<legend>Details</legend>
+@Html.HiddenFor(x => x.Book.BookId)
+<div class="gray-round col-lg-12">
+    <div>
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+            <img src="@Model.Book.CoverThumbnailPath" alt="Book Cover" class="img-thumbnail" />
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-9 col-xs-8">
+            <h4>
+                @Model.Book.Title - <i>@Model.Book.Subtitle</i>
+            </h4>
+            <h5>ISBN 10: @Model.Book.Isbn10</h5>
+            <h5>ISBN 13: @Model.Book.Isbn13</h5>
+            <p>
+                <strong>Author:</strong> @Model.AuthorsText
+            </p>
+            <p>
+                <strong>Publish:</strong> @Model.Book.Publisher, @Model.Book.PublishedDate
+            </p>
+            <p><strong>Category:</strong> @Model.CategoriesText
+            </p>
+            <p>
+                @Model.Book.Description
+            </p>
+            <p>
+                <strong>Location:</strong> 
+                @foreach (var item in Model.LocationCodes)
+                {
+                    @item.Code
+                }
+            </p>
+            <div>
+                <a href="@Url.Action("Edit","Books", new { id = Model.Book.BookId})">Edit this book</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
