@@ -14,6 +14,7 @@ using AutoMapper;
 
 namespace BookInventory.Controllers
 {
+    
     public class BooksController : Controller
     {
         private UnitOfWork uow = new UnitOfWork();
@@ -50,6 +51,7 @@ namespace BookInventory.Controllers
 
         //// GET: Books/Create
         [HttpGet]
+        [Authorize(Users = "admin@administrators.com")]
         public ActionResult Create()
         {
             BookDataViewModel bvm = new BookDataViewModel
@@ -62,6 +64,7 @@ namespace BookInventory.Controllers
 
         //// POST: Books/Create
         [HttpPost]
+        [Authorize(Users = "admin@administrators.com")]
         public ActionResult Create(BookDataViewModel bdModel, IEnumerable<int> itemCode)
         {
             if (ModelState.IsValid)
@@ -148,6 +151,7 @@ namespace BookInventory.Controllers
 
         //// GET: Books/Edit/5
         [HttpGet]
+        [Authorize(Users = "admin@administrators.com")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -174,6 +178,7 @@ namespace BookInventory.Controllers
 
         //// POST: Books/Edit/5
         [HttpPost]
+        [Authorize(Users = "admin@administrators.com")]
         public ActionResult Edit(BookDataViewModel data, IEnumerable<int> itemCode)
         {
             if (ModelState.IsValid)

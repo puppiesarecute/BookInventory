@@ -11,6 +11,7 @@ using BookInventory.DAL;
 
 namespace BookInventory.Controllers
 {
+    [Authorize(Users = "admin@administrators.com")]
     public class LocationCodesController : Controller
     {
         private UnitOfWork uow = new UnitOfWork();
