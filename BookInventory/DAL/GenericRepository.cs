@@ -8,6 +8,9 @@ using System.Linq.Expressions;
 
 namespace BookInventory.DAL
 {
+    /// <summary>
+    /// Author: Ai
+    /// </summary>
     public class GenericRepository<TEntity> where TEntity : class
     {
         internal ApplicationDbContext context;
@@ -19,7 +22,9 @@ namespace BookInventory.DAL
             this.dbSet = context.Set<TEntity>();
         }
 
-        public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, 
+            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+            string includeProperties = "")
         {
             IQueryable<TEntity> query = dbSet;
 

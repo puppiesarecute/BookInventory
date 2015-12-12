@@ -14,7 +14,7 @@ using AutoMapper;
 
 namespace BookInventory.Controllers
 {
-    
+    [Authorize]
     public class BooksController : Controller
     {
         private UnitOfWork uow = new UnitOfWork();
@@ -23,7 +23,13 @@ namespace BookInventory.Controllers
         public ActionResult Index()
         {
             var books = uow.BookRepository.Get();
-            return View(books);
+            BookAuthorCategoryViewModel vm = new BookAuthorCategoryViewModel
+            {
+                AllBooks = uow.BookRepository.Get(),
+                AllAuthors = uow.AuthorRepository.Get(),
+                AllCategories = uow.CategoryRepository.Get()
+            };
+            return View(vm);
         }
 
         //// GET: Books/Details/5
@@ -191,32 +197,5 @@ namespace BookInventory.Controllers
             data.LocationCodes = uow.LocationCodeRepository.Get();
             return View(data);
         }
-
-        //// GET: Books/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Book book = db.Books.Find(id);
-        //    if (book == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(book);
-        //}
-
-        //// POST: Books/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Book book = db.Books.Find(id);
-        //    db.Books.Remove(book);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-
     }
 }

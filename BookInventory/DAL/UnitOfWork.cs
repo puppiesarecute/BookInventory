@@ -6,6 +6,9 @@ using System.Web;
 
 namespace BookInventory.DAL
 {
+    /// <summary>
+    /// Author: Ai
+    /// </summary>
     public class UnitOfWork : IDisposable
     {
         private ApplicationDbContext context = new ApplicationDbContext();
