@@ -1,4 +1,4 @@
-﻿@model BookInventory.Models.ViewModels.BookAuthorCategoryViewModel
+﻿@model IEnumerable<BookInventory.Models.Book>
 
 @{
     ViewBag.Title = "Index";
@@ -17,7 +17,7 @@
 <hr />
 <hr />
 <div class="container-fluid row">
-    @foreach (var item in Model.AllBooks)
+    @foreach (var item in Model)
     {
         <a href="@Url.Action("Details","Books", new { id = item.BookId})" title="@item.Title"><img src="@item.CoverThumbnailPath" alt="Book" class="img-thumbnail"/></a>
     }

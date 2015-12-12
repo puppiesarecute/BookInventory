@@ -23,13 +23,8 @@ namespace BookInventory.Controllers
         public ActionResult Index()
         {
             var books = uow.BookRepository.Get();
-            BookAuthorCategoryViewModel vm = new BookAuthorCategoryViewModel
-            {
-                AllBooks = uow.BookRepository.Get(),
-                AllAuthors = uow.AuthorRepository.Get(),
-                AllCategories = uow.CategoryRepository.Get()
-            };
-            return View(vm);
+          
+            return View(books);
         }
 
         //// GET: Books/Details/5
